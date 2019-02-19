@@ -1,34 +1,71 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
 
-import { ReactComponent as SVGLogo } from './logo.svg'
+import moviess from './movies'
+import MovieList from './movielist'
+import Header from './header'
 import './Home.scss'
 
-export default class Home extends Component {
+import Addmovie from './addmovie'
+
+class Home extends Component {
   static propTypes = {
-    toggleSpinAnimation: PropTypes.func.isRequired,
-    shouldSpin: PropTypes.bool.isRequired,
+    // addMovie : PropTypes.any.isRequired
   }
 
-  state = {}
 
-  render() {
-    const { shouldSpin, toggleSpinAnimation } = this.props
-    return (
-      <div className="App">
-        <header className="App-header">
-          <SVGLogo onClick={toggleSpinAnimation} className={shouldSpin ? 'App-logo Spin' : 'App-logo'} alt="logo" />
-          <p>
-            Edit
-            <code>src/App.js</code>
-            {' '}
-            and save to reload.
-          </p>
-          <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-            Learn React
-          </a>
-        </header>
-      </div>
-    )
+  state = {
+    // movies: [],
+    SearchValue: '',
+    movie: '',
+
   }
+
+/*
+
+  onInputChange = (movie) => {
+    this.setState({
+      movie,
+    })
+  }
+
+
+  addMovie = (movie) => {
+    console.log(movie)
+    const { movies } = this.state
+    const newMovie = [...movies, movie]
+    this.setState({
+      movies: newMovie,
+    })
+  }
+
+*/
+Myinput = value => this.setState({
+  SearchValue: value,
+})
+
+render() {
+  const { SearchValue, movie } = this.state;
+
+  const filtredMovie = moviess.filter(
+    x => x.name.toLowerCase().includes(SearchValue),
+  )
+
+  const {
+    pic,
+  } = this.props
+  return (
+    <div className="App">
+      <Header Myinput={this.Myinput} />
+      <MovieList list={
+        filtredMovie
+      }
+      />
+      <Addmovie />
+
+    </div>
+  );
 }
+}
+export default Home

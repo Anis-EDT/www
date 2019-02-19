@@ -1,0 +1,30 @@
+.boxes {
+    border: solid 1px gray;
+    border-radius: 10px;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 15px;
+    color: rgb(58, 58, 58);
+}
+
+.movielist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.images {
+    width: 130px;
+
+}
+
+.title {
+    font-size: 25px;
+
+}
